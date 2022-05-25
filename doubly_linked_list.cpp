@@ -231,9 +231,12 @@ void list::Delete(int index)
 				#ifndef FAST_LIST
 				cur->_next->_checksum = cur->_next->Checksum();
 				#endif
+				delete cur;
 			}
-			delete cur;
-			_head = _tail = new node();
+			else {
+				delete cur;
+				_head = _tail = new node();
+			}
 		}
 		MessageBox::Show("Данные были успешно удалены", "Удалено");
 		return;
