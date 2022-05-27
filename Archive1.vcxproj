@@ -130,7 +130,6 @@
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="HashFunc.h" />
     <ClInclude Include="HashTable.h" />
-    <ClInclude Include="List_cpp.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

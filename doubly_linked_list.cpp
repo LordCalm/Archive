@@ -104,6 +104,10 @@ void list::InsertAfter(int index, type data)
 			#endif
 
 			if (el != NULL) el->OK();
+			if (_tail->_next)
+			{
+				_tail = _tail->_next;
+			} 
 			return;
 		}
 	}
@@ -208,8 +212,15 @@ void list::Delete(int index)
 		if (cur != NULL) cur->OK();
 		if (index != 1)
 		{
-			if (cur->_prev != NULL) (cur->_prev)->OK();
-			if (cur->_next != NULL) cur->_prev->_next = cur->_next;
+			if (cur->_prev != NULL) {
+				(cur->_prev)->OK();
+				cur->_prev->_next = cur->_next;
+			}
+			
+			if (cur->_next != NULL) {
+				(cur->_next)->OK();
+				cur->_next->_prev = cur->_prev;
+			}
 
 			#ifndef FAST_LIST
 			cur->_prev->_checksum = cur->_prev->Checksum();
@@ -226,7 +237,7 @@ void list::Delete(int index)
 				_head->_checksum = _head->Checksum();
 				#endif
 
-				cur->_next->_prev = cur->_prev;
+				cur->_next->_prev = cur->_prev; //NULL
 
 				#ifndef FAST_LIST
 				cur->_next->_checksum = cur->_next->Checksum();
@@ -364,7 +375,7 @@ void list::BubbleSort()
 
 ofstream& operator<<(ofstream& out, const node& data)
 {
-	out << data._can1 << '&' << data._data << '&' << data._checksum << '&' << data._can2 << '\n';
+	out << data._can1 << '&' << data._data << '&' << data._checksum << '&' << data._can2 << '&' << '\n';
 
 	return out;
 }
